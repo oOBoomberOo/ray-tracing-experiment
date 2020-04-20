@@ -17,11 +17,11 @@ use winit_input_helper::WinitInputHelper;
 use std::fs::File;
 
 fn main() -> Result<()> {
-    simple_logger::init()?;
+    // simple_logger::init()?;
 
     let config = read_config()?;
 
-    let scene = Scene::new(config)?;
+    let mut scene = Scene::new(config)?;
     let event_loop = EventLoop::new();
     let mut input = WinitInputHelper::new();
     let window = scene.window().build(&event_loop)?;

@@ -26,7 +26,7 @@ impl Ray {
         let x = x * camera.aspect_ratio * camera.fov;
         let y = y * camera.fov;
 
-        let origin = Vec3::zero();
+        let origin = camera.pos;
         let direction = Vec3::new(x, y, -1.0).normalized();
 
         Ray::new(origin, direction)

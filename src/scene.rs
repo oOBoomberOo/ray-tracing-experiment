@@ -45,8 +45,8 @@ impl Scene {
         }
     }
 
-    pub fn update(&self, _input: &WinitInputHelper) {
-
+    pub fn update(&mut self, input: &WinitInputHelper) {
+        self.camera.update(input)
     }
 }
 

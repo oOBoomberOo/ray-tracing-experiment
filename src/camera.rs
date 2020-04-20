@@ -1,5 +1,8 @@
 use crate::serialize::CameraConfig;
 use winit::dpi::LogicalSize;
+use winit_input_helper::WinitInputHelper;
+use winit::event::VirtualKeyCode;
+use ultraviolet::Vec3;
 
 #[derive(Debug, Default, Clone)]
 pub struct Camera {
@@ -7,6 +10,8 @@ pub struct Camera {
     pub height: f32,
     pub fov: f32,
     pub aspect_ratio: f32,
+    pub pos: Vec3,
+    pub speed: f32
 }
 
 impl Camera {
@@ -21,6 +26,24 @@ impl Camera {
     pub fn get_size(&self) -> LogicalSize<f32> {
         LogicalSize::new(self.width, self.height)
     }
+
+    pub fn update(&mut self, input: &WinitInputHelper) {
+        let mut movement = Vec3::default();
+
+        if input.key_held(VirtualKeyCode::W) {
+            movement -= Vec3::unit_z();
+        } else if input.key_held(VirtualKeyCode::S) {
+            movement += Vec3::unit_z();
+        }
+
+        if input.key_held(VirtualKeyCode::A) {
+            movement -= Vec3::unit_x();
+        } else if input.key_held(VirtualKeyCode::D) {
+            movement += Vec3::unit_x();
+        }
+
+        self.pos += movement * self.speed;
+    }
 }
 
 impl Camera {
@@ -34,6 +57,11 @@ impl Camera {
         self.fov = (fov.to_radians() * 0.5).tan();
         self
     }
+
+    pub fn speed(mut self, speed: f32) -> Self {
+        self.speed = speed;
+        self
+    }
 }
 
 impl From<CameraConfig> for Camera {
@@ -41,5 +69,6 @@ impl From<CameraConfig> for Camera {
         Camera::new()
             .size(config.width, config.height)
             .fov(config.fov)
+            .speed(config.speed)
     }
 }
