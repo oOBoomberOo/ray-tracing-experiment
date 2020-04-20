@@ -1,0 +1,67 @@
+{
+	"entities": [
+		{
+			"type": "sphere",
+			"data": {
+				"pos": [0.0, 0.0, -5.0],
+				"radius": 1.0,
+				"material": {
+					"color": [0.1953125, 0.44140625, 0.65625],
+					"albedo": 1.0,
+					"reflectivity": 0.9
+				}
+			}
+		},
+		{
+			"type": "sphere",
+			"data": {
+				"pos": [-2.0, 0.0, -2.5],
+				"radius": 1.0,
+				"material": {
+					"color": [1.0, 0.3, 0.3],
+					"albedo": 1.0,
+					"reflectivity": 0.9
+				}
+			}
+		},
+		{
+			"type": "sphere",
+			"data": {
+				"pos": [2.0, 0.0, -2.5],
+				"radius": 1.0,
+				"material": {
+					"color": [0.3, 1.0, 0.2],
+					"albedo": 1.0,
+					"reflectivity": 0.9
+				}
+			}
+		},
+		{
+			"type": "plane",
+			"data": {
+				"pos": [0.0, 1.0, 0.0],
+				"normal": [0.0, 1.0, 0.0],
+				"material": {
+					"color": { "texture": "assets/checkerboard.png" },
+					"albedo": 1.0,
+					"reflectivity": 0.3
+				}
+			}
+		}
+	],
+	"lights": [
+		{
+			"type": "directional_light",
+			"data": {
+				"direction": [-1.0, 1.0, -1.0],
+				"color": [1.0, 1.0, 1.0],
+				"intensity": 10.0
+			}
+		}
+	],
+	"camera": {
+		"fov": 90.0,
+		"width": 600.0,
+		"height": 600.0
+	}
+}
