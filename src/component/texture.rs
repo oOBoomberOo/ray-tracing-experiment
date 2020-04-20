@@ -1,14 +1,11 @@
 use super::*;
-use image::DynamicImage;
-use image::GenericImageView;
-use image::Rgba;
-use std::path::PathBuf;
-use std::fmt;
+use image::{DynamicImage, GenericImageView, Rgba};
+use std::{fmt, path::PathBuf};
 
 #[derive(Clone)]
 pub struct Texture {
 	path: PathBuf,
-	texture: DynamicImage
+	texture: DynamicImage,
 }
 
 impl Texture {
@@ -22,7 +19,11 @@ impl Texture {
 		let (x, y) = self.wrap(texture_coord);
 		let pixel: Rgba<u8> = self.texture.get_pixel(x, y);
 		let [red, green, blue, _] = pixel.0;
-		let (red, green, blue) = (red as f32 / 256.0, green as f32 / 256.0, blue as f32 / 256.0);
+		let (red, green, blue) = (
+			red as f32 / 256.0,
+			green as f32 / 256.0,
+			blue as f32 / 256.0,
+		);
 		Color::new(red, green, blue)
 	}
 
@@ -36,15 +37,18 @@ impl Texture {
 		let signed_bound = bound as i32;
 		let float_coord = val * bound as f32;
 		let wrapped_coord = (float_coord as i32) % signed_bound;
-		
+
 		if wrapped_coord < 0 {
 			(wrapped_coord + signed_bound) as u32
-		} else {
+		}
+		else {
 			wrapped_coord as u32
 		}
 	}
 }
 
 impl fmt::Debug for Texture {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result { write!(f, "{}", self.path.display()) }
+	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+		write!(f, "{}", self.path.display())
+	}
 }

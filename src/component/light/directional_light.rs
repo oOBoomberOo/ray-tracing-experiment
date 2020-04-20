@@ -48,7 +48,8 @@ impl Light for DirectionalLight {
 		let is_shadow = scene.compute_pixel(&shadow_ray).is_some();
 		let shadow_intensity = if is_shadow { 0.0 } else { 1.0 };
 
-		let light_power = surface_normal.dot(direction_to_light).max(0.0) * self.intensity * shadow_intensity;
+		let light_power =
+			surface_normal.dot(direction_to_light).max(0.0) * self.intensity * shadow_intensity;
 		let light_reflected = intersection.reflected_light();
 
 		intersection.color(contact) * self.color * light_power * light_reflected

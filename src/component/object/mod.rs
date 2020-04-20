@@ -1,6 +1,6 @@
-mod sphere;
 mod plane;
+mod sphere;
 
 use super::*;
-pub use sphere::*;
 pub use plane::*;
+pub use sphere::*;

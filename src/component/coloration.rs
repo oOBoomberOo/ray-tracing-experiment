@@ -5,7 +5,7 @@ use crate::serialize::ColorConfig;
 pub enum Coloration {
 	Color(Color),
 	Texture(Texture),
-	Other
+	Other,
 }
 
 impl Coloration {
@@ -13,7 +13,7 @@ impl Coloration {
 		match self {
 			Self::Color(color) => *color,
 			Self::Texture(tex) => tex.color(texture_coord),
-			Self::Other => Color::BACKGROUND
+			Self::Other => Color::BACKGROUND,
 		}
 	}
 }
@@ -22,7 +22,7 @@ impl From<ColorConfig> for Coloration {
 	fn from(color: ColorConfig) -> Self {
 		match color {
 			ColorConfig::Color(c) => Coloration::Color(c.into()),
-			ColorConfig::Texture { texture } => Coloration::Texture(Texture::new(texture))
+			ColorConfig::Texture { texture } => Coloration::Texture(Texture::new(texture)),
 		}
 	}
 }
